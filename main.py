@@ -14,13 +14,37 @@ def ver_ranking():
     messagebox.showinfo("Ranking", "Aquí se mostraría el ranking final")
 
 def salir():
-    ventana.quit()
+    root.quit()
 
-ventana = tk.Tk()
-ventana.title("Concurso de Bandas - Quetzaltenango")
-ventana.geometry("500x300")
+BUTTONS_PRINCIPAL_MENU = []
 
-barra_menu = tk.Menu(ventana)
+root = tk.Tk()
+root.title("Concurso de Bandas - Quetzaltenango")
+root.geometry("800x500")
+
+barra_menu = tk.Menu(root)
+principal_frame = tk.Frame(root)
+principal_frame.config(bg='#4287f5', width=800, height=500)
+principal_frame.pack(expand=True, fill='both')
+#principal_frame.grid(column=0, row=0, sticky='nsew', rowspan=10)
+
+#BASE MENU PRINCIAPL
+etiqueta = tk.Label(
+    principal_frame,
+    text="Sistema de Inscripción y Evaluación de Bandas Escolares\nDesfile 15 de Septiembre - Quetzaltenango",
+    font=("Arial", 20, "bold"),
+    justify="center"
+)
+etiqueta.pack(pady=50)
+button_inscr_bad = tk.Button(principal_frame, text='Inscribir bandas por categoria')
+button_register = tk.Button(principal_frame, text='Registrar puntajes por criterios')
+button_list_bands = tk.Button(principal_frame, text='Listar bandas inscritas')
+button_gen_rank = tk.Button(principal_frame, text='Generar ranking')
+BUTTONS_PRINCIPAL_MENU.extend([button_inscr_bad, button_register, button_list_bands, button_gen_rank])
+for i in BUTTONS_PRINCIPAL_MENU:
+    i.config(width=30, font=('Arial', 15))
+    i.pack(pady=10)
+
 
 menu_opciones = tk.Menu(barra_menu, tearoff=0)
 menu_opciones.add_command(label="Inscribir Banda", command=inscribir_banda)
@@ -32,14 +56,8 @@ menu_opciones.add_command(label="Salir", command=salir)
 
 barra_menu.add_cascade(label="Opciones", menu=menu_opciones)
 
-ventana.config(menu=barra_menu)
+root.config(menu=barra_menu)
 
-etiqueta = tk.Label(
-    ventana,
-    text="Sistema de Inscripción y Evaluación de Bandas Escolares\nDesfile 15 de Septiembre - Quetzaltenango",
-    font=("Arial", 12, "bold"),
-    justify="center"
-)
-etiqueta.pack(pady=50)
 
-ventana.mainloop()
+
+root.mainloop()
