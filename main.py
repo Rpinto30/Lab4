@@ -1,37 +1,46 @@
 import tkinter as tk
+#import tkinter.ttk
 from tkinter import messagebox
-
+from tkinter.ttk import Combobox #Para el menú deslplegable
 
 def inscribir_banda():
     root.change_frame(inscribe_frame)
-    f_ib = tk.Frame(inscribe_frame)
-    f_ib.pack()
-    #inscribe_frame.grid_columnconfigure(0, weight=1)
+    f_ib_op = tk.Frame(inscribe_frame) #PARA LAS OPCIONES
+    f_ib_op.pack()
+    f_ib_acept = tk.Frame(inscribe_frame)
+    f_ib_acept.pack()
 
-    l_ib_title = tk.Label(f_ib, text='Inscribir banda', font=('Arial',20))
-
+    l_ib_title = tk.Label(f_ib_op, text='Inscribir banda', font=('Arial',35))
+    pady_options = 30
     #LABELS
-    l_ib_name = tk.Label(f_ib, text= 'Ingresa el nombre de tu banda')
+    l_ib_name = tk.Label(f_ib_op, text= 'Ingresa el nombre de tu banda', anchor="w")
 
-    l_ib_code = tk.Label(f_ib, text='Ingresa un codigo para tu banda')
-    l_ib_institution = tk.Label(f_ib, text='Ingresa un codigo para tu banda')
+    l_ib_code = tk.Label(f_ib_op, text='Ingresa un codigo para tu banda', anchor="w")
+    l_ib_institution = tk.Label(f_ib_op, text='Ingresa el nombre de la instutición para tu banda')
+    l_ib_category = tk.Label(f_ib_op, text='Ingresa una categoria para tu banda')
     #ENTRIES
-    e_ib_name = tk.Entry(f_ib, width=25, font=('Arial', 15))
-    e_ib_code = tk.Entry(f_ib, width=25, font=('Arial', 15))
-    e_ib_institution = tk.Entry(f_ib, width=25, font=('Arial', 15))
-    e_ib_category = tk.Entry(f_ib, width=25, font=('Arial', 15))
+    e_ib_name = tk.Entry(f_ib_op, width=25, font=('Arial', 12))
+    e_ib_code = tk.Entry(f_ib_op, width=25, font=('Arial', 12))
+    e_ib_institution = tk.Entry(f_ib_op, width=25, font=('Arial', 12))
+    e_ib_category = Combobox(f_ib_op, width=23, state='readonly', font=('Arial', 12), values=['Primaria','Básico', 'Bachillerato'])
 
-    b_ib_exit = tk.Button(f_ib, text='Cancelar', font=('Arial',12), command=return_main)
+    b_ib_acept = tk.Button(f_ib_acept, text='Aceptar', font=('Arial',12))
+    b_ib_exit = tk.Button(f_ib_op, text='Cancelar', font=('Arial',12), command=return_main)
 
+    l_ib_error = tk.Label(f_ib_op, text='Error', font=('Arial',12))
 
-    l_ib_title.grid(column=1, row=0, pady=20, sticky='nsew',columnspan=4)
+    l_ib_title.grid(column=1, row=0, sticky='nsew',columnspan=4, pady=55)
     l_ib_name.grid(column=1, row=1, padx=20)
     e_ib_name.grid(column=2, row=1, padx=20)
-    l_ib_code.grid(column=1, row=2, padx=20, pady=10)
+    l_ib_code.grid(column=1, row=2, padx=20, pady=pady_options)
     e_ib_code.grid(column=2, row=2, padx=20)
-    l_ib_code.grid(column=1, row=2, padx=20, pady=10)
-    e_ib_code.grid(column=2, row=2, padx=20)
+    l_ib_category.grid(column=1, row=3, padx=20, pady=pady_options-pady_options//1.1)
+    e_ib_category.grid(column=2, row=3, padx=20)
+    l_ib_institution.grid(column=1, row=4, padx=20, pady=pady_options)
+    e_ib_institution.grid(column=2, row=4, padx=20)
 
+    l_ib_error.grid(column=1, row=5, columnspan=2, pady=15)
+    b_ib_acept.pack(pady=20, padx=253)
 
 def registrar_evaluacion():
     root.change_frame(register_frame)
@@ -50,7 +59,9 @@ class Window(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title("Concurso de Bandas - Quetzaltenango")
-        self.geometry("800x500")
+        self.geometry("1000x500")
+        self.resizable(True,False)
+        self.minsize(width=1000, height=500)
         self.grid_rowconfigure(0, weight=1)
         self.grid_columnconfigure(0, weight=1)
 
