@@ -56,6 +56,7 @@ class Concurso:
 
 
 
+
     def registrar_puntaje(self, search_codigo:tk.Entry, entry_puntaje:tk.Entry):
         search_codigo = tk.Entry(search_codigo)
         if search_codigo in self.bandas:
