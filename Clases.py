@@ -37,25 +37,29 @@ class Concurso:
         self.bandas = {}
 
     def inscribir_banda(self, entry_nombre:str, entry_institucion:str, entry_codigo:str, entry_categoria:str ):
+        error = ''
+        if entry_codigo in self.bandas:
+            if error != '' : error += ','
+            error += " Codigo de banda ya utilizado"
+        elif entry_codigo.strip() == "":
+            if error != '': error += ','
+            error += " Codigo de banda vacío"
+        if entry_nombre.strip() == "":
+            if error != '': error += ','
+            error += " Nombre vacío"
+        if entry_institucion.strip() == "":
+            if error != '': error += ','
+            error += " Institución vacía "
+        if entry_categoria.strip() == "":
+            if error != '': error += ','
+            error += " Categoria vacia "
 
-        if entry_codigo not in self.bandas:
-            if entry_nombre.strip() != "":
-                if entry_institucion.strip() != "":
-                    if entry_categoria.strip() != "":
-                        self.bandas[entry_codigo] = BandaEscolar(entry_nombre, entry_institucion, entry_codigo, entry_categoria, 0)
-                        return 0
-                    else:
-                        return "Categoria vacia"
-                else:
-                    return "Institucion vacia"
-            else:
-                return "Nombre vacio"
+        if error == '':
+            self.bandas[entry_codigo] = BandaEscolar(entry_nombre, entry_institucion, entry_codigo, entry_categoria, 0)
+            return 0
         else:
-            return "Codigo de banda ya existente"
-
-
-
-
+            error = "Error: " + error
+            return error
 
     def registrar_puntaje(self, search_codigo:tk.Entry, entry_puntaje:tk.Entry):
         search_codigo = tk.Entry(search_codigo)
