@@ -1,3 +1,5 @@
+from tkinter import PhotoImage
+
 from usesful_funcs import *
 
 def insc_form(mainroot, inscription_frame, main_frame):
@@ -6,11 +8,17 @@ def insc_form(mainroot, inscription_frame, main_frame):
     f_ib_op = tk.Frame(inscription_frame, width=550, height=420) #PARA LAS OPCIONES
     f_ib_acept = tk.Frame(inscription_frame, width=550, height=80, bg='red')
 
+    img_borrar = PhotoImage(file=r"C:\Users\rodri\PycharmProjects\Lab4\borrar.gif", height=500, width=321)
+    l_img_borrar = tk.Label(inscription_frame, image=img_borrar)
+    l_img_borrar.image = img_borrar
+
     f_ib_op.pack_propagate(False)
     f_ib_acept.pack_propagate(False)
 
-    f_ib_op.pack()
-    f_ib_acept.pack()
+    l_img_borrar.pack(side='left')
+    f_ib_op.pack(side='top')
+    f_ib_acept.pack(side="top")
+
 
     l_ib_title = tk.Label(f_ib_op, text='Inscribir banda', font=('Arial',25))
     pad_options = (10,15)
@@ -53,9 +61,14 @@ def insc_form(mainroot, inscription_frame, main_frame):
         return_main(mainroot, main_frame)
 
     def verify_cancel():
-        l_ib_info.config(text='¿Estás seguro que deseas cancelar?', fg='black')
-        b_ib_acept.config(text='Sí')
-        b_ib_cancel.config(text='No')
+        if b_ib_cancel.cget('text') == 'Cancelar':
+            l_ib_info.config(text='¿Estás seguro que deseas cancelar?', fg='black')
+            b_ib_acept.config(text='Sí')
+            b_ib_cancel.config(text='No')
+        else:
+            l_ib_info.config(text=' ', fg='black')
+            b_ib_acept.config(text='Aceptar')
+            b_ib_cancel.config(text='Cancelar')
 
     #BOTONES
     l_ib_info = tk.Label(f_ib_op, text=' ', font=('Arial', 12), fg='black')

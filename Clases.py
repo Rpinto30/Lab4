@@ -19,7 +19,7 @@ class BandaEscolar(BandaParticipante):
 
     @property
     def categoria(self):
-        return categorias
+        return self._categoria
 
     def set_categoria(self, categori):
         if categori in categorias:

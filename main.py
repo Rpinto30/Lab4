@@ -6,6 +6,10 @@ from tkinter import PhotoImage
 from Clases import Concurso
 from inscription_band import insc_form
 
+def show():
+    for i,j in root.concurso.bandas.items():
+        print(f'code:{i} banda:{j.nombre}, {j.categoria}')
+
 def salir():
     if root.CURRENT_FRAME == principal_frame: root.quit()
     else: root.change_frame(principal_frame)
@@ -15,7 +19,7 @@ class Window(tk.Tk):
         super().__init__()
         self.title("Concurso de Bandas - Quetzaltenango")
         self.geometry("1000x500")
-        #self.resizable(False,False)
+        self.resizable(False,False)
         self.grid_rowconfigure(0, weight=1)
         self.grid_columnconfigure(0, weight=1)
         self.concurso = Concurso()
@@ -31,8 +35,6 @@ class Window(tk.Tk):
         self.CURRENT_FRAME = frame
         self.CURRENT_FRAME.grid(row=0, column=0, sticky='nsew')
         self.CURRENT_FRAME.tkraise()
-
-
 
 BUTTONS_PRINCIPAL_MENU = []
 IMAGES_BUTTONS_PRINCIPAL_MENU = []
@@ -65,8 +67,8 @@ IMAGES_BUTTONS_PRINCIPAL_MENU.extend([
     PhotoImage(file=r"prubea boton.png", height=42, width=380)
 ])
 button_inscr_bad = tk.Button(principal_frame, command=lambda:insc_form(root, inscribe_frame,principal_frame))
-button_register = tk.Button(principal_frame)
-button_list_bands = tk.Button(principal_frame)
+button_register = tk.Button(principal_frame, command=lambda:root.change_frame(register_frame))
+button_list_bands = tk.Button(principal_frame, command=show)
 button_gen_rank = tk.Button(principal_frame)
 BUTTONS_PRINCIPAL_MENU.extend([button_inscr_bad, button_register, button_list_bands, button_gen_rank])
 for n,i in enumerate(BUTTONS_PRINCIPAL_MENU):
@@ -74,7 +76,6 @@ for n,i in enumerate(BUTTONS_PRINCIPAL_MENU):
                 image=IMAGES_BUTTONS_PRINCIPAL_MENU[0], cursor='hand2' )
     i.pack(pady=10)
 
-#-----------------------INSCRIB BAND------------------
 
 
 #------------------------REGISTER NOTE--------------
