@@ -1,6 +1,6 @@
 import tkinter as tk
-#import tkinter.ttk
 from tkinter import messagebox
+from tkinter import PhotoImage
 from tkinter.ttk import Combobox #Para el menú deslplegable
 
 def inscribir_banda():
@@ -24,7 +24,7 @@ def inscribir_banda():
     e_ib_institution = tk.Entry(f_ib_op, width=25, font=('Arial', 12))
     e_ib_category = Combobox(f_ib_op, width=23, state='readonly', font=('Arial', 12), values=['Primaria','Básico', 'Bachillerato'])
 
-    b_ib_acept = tk.Button(f_ib_acept, text='Aceptar', font=('Arial',12))
+    b_ib_acept = tk.Button(f_ib_acept, text='Aceptar', font=('Arial',12), command=return_main)
     b_ib_exit = tk.Button(f_ib_op, text='Cancelar', font=('Arial',12), command=return_main)
 
     l_ib_error = tk.Label(f_ib_op, text='Error', font=('Arial',12))
@@ -79,7 +79,7 @@ root = Window()
 principal_frame = tk.Frame(root)
 root.change_frame(principal_frame)
 
-principal_frame.config(bg='#4287f5', width=800, height=500)
+principal_frame.config(bg='#ffffff', width=800, height=500)
 
 inscribe_frame = tk.Frame(root)
 inscribe_frame.config(bg='#ad3e3e',width=1000, height=500)
@@ -95,13 +95,15 @@ etiqueta = tk.Label(
     justify="center"
 )
 etiqueta.pack(pady=50)
-button_inscr_bad = tk.Button(principal_frame, text='Inscribir bandas por categoria', command=inscribir_banda)
+photo_inscr_bad = PhotoImage(file = r"prubea boton.png",height=66, width=611)
+button_inscr_bad = tk.Button(principal_frame, command=inscribir_banda, image=photo_inscr_bad, bg='SystemButtonFace')
 button_register = tk.Button(principal_frame, text='Registrar puntajes por criterios', command=registrar_evaluacion)
 button_list_bands = tk.Button(principal_frame, text='Listar bandas inscritas')
 button_gen_rank = tk.Button(principal_frame, text='Generar ranking')
 BUTTONS_PRINCIPAL_MENU.extend([button_inscr_bad, button_register, button_list_bands, button_gen_rank])
 for i in BUTTONS_PRINCIPAL_MENU:
-    i.config(width=30, font=('Arial', 15))
+    i.configure(fg="white", compound = 'left', borderwidth=0,highlightthickness=0,relief="flat")
+    #i.config(width=30, font=('Arial', 15))
     i.pack(pady=10)
 
 
