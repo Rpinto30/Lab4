@@ -27,7 +27,7 @@ def inscribir_banda():
     b_ib_acept = tk.Button(f_ib_acept, text='Aceptar', font=('Arial',12), command=return_main)
     b_ib_exit = tk.Button(f_ib_op, text='Cancelar', font=('Arial',12), command=return_main)
 
-    l_ib_error = tk.Label(f_ib_op, text='Error', font=('Arial',12))
+    l_ib_error = tk.Label(f_ib_op, text=' ', font=('Arial',12))
 
     l_ib_title.grid(column=1, row=0, sticky='nsew',columnspan=4, pady=55)
     l_ib_name.grid(column=1, row=1, padx=20)
@@ -53,19 +53,21 @@ def ver_ranking():
 
 
 def return_main(): root.change_frame(principal_frame)
-def salir(): root.quit()
+def salir():
+    if root.CURRENT_FRAME == principal_frame: root.quit()
+    else: root.change_frame(principal_frame)
 
 class Window(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title("Concurso de Bandas - Quetzaltenango")
         self.geometry("1000x500")
-        self.resizable(True,False)
-        self.minsize(width=1000, height=500)
+        self.resizable(False,False)
         self.grid_rowconfigure(0, weight=1)
         self.grid_columnconfigure(0, weight=1)
 
         self.CURRENT_FRAME = None
+        self.protocol("WM_DELETE_WINDOW", salir)
 
     def change_frame(self, frame):
 
@@ -74,12 +76,14 @@ class Window(tk.Tk):
         self.CURRENT_FRAME.tkraise()
 
 BUTTONS_PRINCIPAL_MENU = []
+IMAGES_BUTTONS_PRINCIPAL_MENU = []
+BACKGROUND_PRINCIPAL = "#ffffff"
 
 root = Window()
 principal_frame = tk.Frame(root)
 root.change_frame(principal_frame)
 
-principal_frame.config(bg='#ffffff', width=800, height=500)
+principal_frame.config(bg=BACKGROUND_PRINCIPAL, width=800, height=500)
 
 inscribe_frame = tk.Frame(root)
 inscribe_frame.config(bg='#ad3e3e',width=1000, height=500)
@@ -94,18 +98,22 @@ etiqueta = tk.Label(
     font=("Arial", 20, "bold"),
     justify="center"
 )
-etiqueta.pack(pady=50)
-photo_inscr_bad = PhotoImage(file = r"prubea boton.png",height=66, width=611)
-button_inscr_bad = tk.Button(principal_frame, command=inscribir_banda, image=photo_inscr_bad, bg='SystemButtonFace')
-button_register = tk.Button(principal_frame, text='Registrar puntajes por criterios', command=registrar_evaluacion)
-button_list_bands = tk.Button(principal_frame, text='Listar bandas inscritas')
-button_gen_rank = tk.Button(principal_frame, text='Generar ranking')
+etiqueta.pack(pady=50)#377 42
+IMAGES_BUTTONS_PRINCIPAL_MENU.extend([
+    PhotoImage(file = r"prubea boton.png",height=42, width=380),
+    PhotoImage(file=r"prubea boton.png", height=42, width=380),
+    PhotoImage(file=r"prubea boton.png", height=42, width=380),
+    PhotoImage(file=r"prubea boton.png", height=42, width=380)
+])
+button_inscr_bad = tk.Button(principal_frame, command=inscribir_banda)
+button_register = tk.Button(principal_frame, command=registrar_evaluacion)
+button_list_bands = tk.Button(principal_frame)
+button_gen_rank = tk.Button(principal_frame)
 BUTTONS_PRINCIPAL_MENU.extend([button_inscr_bad, button_register, button_list_bands, button_gen_rank])
-for i in BUTTONS_PRINCIPAL_MENU:
-    i.configure(fg="white", compound = 'left', borderwidth=0,highlightthickness=0,relief="flat")
-    #i.config(width=30, font=('Arial', 15))
+for n,i in enumerate(BUTTONS_PRINCIPAL_MENU):
+    i.configure(bg=BACKGROUND_PRINCIPAL, borderwidth=1,highlightthickness=0,relief="flat",
+                image=IMAGES_BUTTONS_PRINCIPAL_MENU[0], cursor='hand2' )
     i.pack(pady=10)
-
 
 #-----------------------INSCRIB BAND------------------
 
