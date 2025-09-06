@@ -55,7 +55,6 @@ def inscribir_banda():
     #       Sino
     #           return 1
 
-
 def registrar_evaluacion():
     root.change_frame(register_frame)
 
