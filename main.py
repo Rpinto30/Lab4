@@ -44,6 +44,7 @@ def inscribir_banda():
     l_ib_error.grid(column=1, row=5, columnspan=2, pady=15)
     b_ib_acept.pack(pady=20, padx=253)
 
+
 #def inscrib_banda(e_name, e_codigo...) Herman:
     #Concurso.inscribir(e_ib_name.get(), ...)
     #    -> Si name no está vacio  (if e_name != '')
