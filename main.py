@@ -14,33 +14,46 @@ def inscribir_banda():
     pady_options = 30
     #LABELS
     l_ib_name = tk.Label(f_ib_op, text= 'Ingresa el nombre de tu banda', anchor="w")
-
     l_ib_code = tk.Label(f_ib_op, text='Ingresa un codigo para tu banda', anchor="w")
     l_ib_institution = tk.Label(f_ib_op, text='Ingresa el nombre de la instutición para tu banda')
     l_ib_category = tk.Label(f_ib_op, text='Ingresa una categoria para tu banda')
-    #ENTRIES
+    #ENTRY
+    global e_ib_name
     e_ib_name = tk.Entry(f_ib_op, width=25, font=('Arial', 12))
     e_ib_code = tk.Entry(f_ib_op, width=25, font=('Arial', 12))
+    e_ib_code.delete(0, tk.END)
     e_ib_institution = tk.Entry(f_ib_op, width=25, font=('Arial', 12))
-    e_ib_category = Combobox(f_ib_op, width=23, state='readonly', font=('Arial', 12), values=['Primaria','Básico', 'Bachillerato'])
-
-    b_ib_acept = tk.Button(f_ib_acept, text='Aceptar', font=('Arial',12), command=return_main)
-    b_ib_exit = tk.Button(f_ib_op, text='Cancelar', font=('Arial',12), command=return_main)
-
+    e_ib_institution.delete(0, tk.END)
+    #COMBOBOX
+    c_ib_category = Combobox(f_ib_op, width=23, state='readonly', font=('Arial', 12),
+                             values=['Primaria','Básico', 'Bachillerato'])
+    #BUTTONS
+    b_ib_acept = tk.Button(f_ib_acept, text='Cancelar', font=('Arial',12), command=return_main)
     l_ib_error = tk.Label(f_ib_op, text=' ', font=('Arial',12))
-
+    #GRID
     l_ib_title.grid(column=1, row=0, sticky='nsew',columnspan=4, pady=55)
     l_ib_name.grid(column=1, row=1, padx=20)
     e_ib_name.grid(column=2, row=1, padx=20)
     l_ib_code.grid(column=1, row=2, padx=20, pady=pady_options)
     e_ib_code.grid(column=2, row=2, padx=20)
     l_ib_category.grid(column=1, row=3, padx=20, pady=pady_options-pady_options//1.1)
-    e_ib_category.grid(column=2, row=3, padx=20)
+    c_ib_category.grid(column=2, row=3, padx=20)
     l_ib_institution.grid(column=1, row=4, padx=20, pady=pady_options)
     e_ib_institution.grid(column=2, row=4, padx=20)
 
     l_ib_error.grid(column=1, row=5, columnspan=2, pady=15)
     b_ib_acept.pack(pady=20, padx=253)
+
+#def inscrib_banda(e_name, e_codigo...) Herman:
+    #Concurso.inscribir(e_ib_name.get(), ...)
+    #    -> Si name no está vacio  (if e_name != '')
+    #    -> Si codigo no está registrado
+    #    -> Si institucion no vacia
+    #           Dentro del diccionario de concurso, creas banda()
+                #Return 0
+    #       Sino
+    #           return 1
+
 
 def registrar_evaluacion():
     root.change_frame(register_frame)
@@ -68,6 +81,7 @@ class Window(tk.Tk):
 
         self.CURRENT_FRAME = None
         self.protocol("WM_DELETE_WINDOW", salir)
+        #Concurso()
 
     def change_frame(self, frame):
 
