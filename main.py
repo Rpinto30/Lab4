@@ -66,8 +66,8 @@ etiqueta.pack(pady=5)
 IMAGES_BUTTONS_PRINCIPAL_MENU.extend([
     PhotoImage(file = r"imagenes\btt_inscrb.png",height=60, width=600),
     PhotoImage(file=r"imagenes\btt_rate.png", height=60, width=600),
-    PhotoImage(file=r"imagenes\prubea boton.png", height=60, width=600),
-    PhotoImage(file=r"imagenes\prubea boton.png", height=60, width=600)
+    PhotoImage(file=r"imagenes\btt_list.png", height=60, width=600),
+    PhotoImage(file=r"imagenes\btt_ranking.png", height=60, width=600)
 ])
 
 buttons_frame = tk.Frame(principal_frame, bg = BACKGROUND_PRINCIPAL)

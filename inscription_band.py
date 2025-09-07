@@ -1,5 +1,4 @@
 from tkinter import PhotoImage
-
 from usesful_funcs import *
 
 def insc_form(mainroot, inscription_frame, main_frame):

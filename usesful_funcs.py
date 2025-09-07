@@ -1,7 +1,6 @@
 import tkinter as tk
 from tkinter.ttk import Combobox
 
-
 def pack_create_line(master:tk.Frame, left_widget, right_widget, _padx=0, _pady=0, width=0,height=0, bg='#f0f0f0'):
     row = tk.Frame(master, width=width+5, height=height, bg=bg)
     left_widget.pack(in_=row, side='left', anchor='center', padx=_padx)
