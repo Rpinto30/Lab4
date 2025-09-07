@@ -1,12 +1,11 @@
-import tkinter
-
 from usesful_funcs import *
-from tkinter.ttk import Combobox, Scale
+from tkinter.ttk import Combobox
 from tkinter import PhotoImage
+from tkinter import messagebox
 
 def rate_form(mainroot, rate_frame, main_frame):
     mainroot.change_frame(rate_frame)
-    f_combo_select = tk.Frame(rate_frame, height=120)
+    f_combo_select = tk.Frame(rate_frame, height=160)
     f_combo_select.pack_propagate(False)
     f_combo_select.pack(anchor='center', fill='x')
 
@@ -25,7 +24,10 @@ def rate_form(mainroot, rate_frame, main_frame):
     c_list_bands = Combobox(f_combo_select, state='readonly',values=[b.nombre for b in bands], width=30, font=('Arial', 15))
     c_list_bands.pack(expand=True, anchor="center")
 
-    def pack_rate_forms(event):
+    b_cancel = tk.Button(f_combo_select, text='Salir', width=10, font=('Arial', 10), command=lambda:return_main(mainroot, main_frame))
+    b_cancel.pack(pady=5)
+
+    def pack_rate_forms():
         c_list_bands.config(state='disable')
         l_photo.pack_forget()
         l_select_info.pack_forget()
@@ -68,6 +70,11 @@ def rate_form(mainroot, rate_frame, main_frame):
         b_mod = tk.Button(f_acept,text='Cambiar Banda', width=15, font=('Arial',14))
         b_cancel = tk.Button(f_acept,text='Salir', width=10, font=('Arial',14))
 
+        def exit_frame():
+            m_end = messagebox.showinfo("Guardado de datos",
+                                        f'Se ha guardado correctamente el puntaje de {c_list_bands.get()}')
+            return_main(mainroot, main_frame)
+
         def cancel():
             if b_cancel.cget('text') == 'Salir':
                 b_mod.config(state='disabled')
@@ -84,7 +91,18 @@ def rate_form(mainroot, rate_frame, main_frame):
 
         def acept():
             if b_acept.cget('text') == 'Aceptar':
-                pass
+                for band in bands:
+                    if band.nombre == str(c_list_bands.get()):
+                        b_acept.config(state='disabled')
+                        b_mod.config(state='disabled')
+                        b_cancel.config(state='disabled')
+                        for sc in scalers: sc.config(state='disabled')
+                        l_info_rate.config(text='GUARDANDO...')
+
+                        mainroot.concurso.bandas[band.codigo].registrar_puntajes(int(s_ritmo.get()),'ritmo')
+                        mainroot.concurso.bandas[band.codigo].suma_total()
+                        break
+                mainroot.after(ms=1000, func=exit_frame)
             else:
                 return_main(mainroot, main_frame)
 
@@ -106,5 +124,19 @@ def rate_form(mainroot, rate_frame, main_frame):
         b_acept.pack(anchor='center', side="left", padx=65)
         b_mod.pack(anchor='center', side="left", padx=65)
         b_cancel.pack(anchor='center', side="left", padx=65)
+
+        #MODIFICAR
+
+    def check_modiffy_band():
+        q = True
+        for band in bands:
+            if band.nombre == str(c_list_bands.get()):
+                if band.puntaje_total != 0:
+                    q = messagebox.askyesno('Modificar calificación de banda',
+                                            '¿Deseas modificar la calificacion de esta banda?')
+                    break
+        if q: pack_rate_forms()
+        else: c_list_bands.set('')
+
     #https://python-course.eu/tkinter/events-and-binds-in-tkinter.php
-    c_list_bands.bind("<<ComboboxSelected>>", lambda event: pack_rate_forms(event))
+    c_list_bands.bind("<<ComboboxSelected>>", lambda event: check_modiffy_band())

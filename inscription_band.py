@@ -46,7 +46,7 @@ def insc_form(mainroot, inscription_frame, main_frame):
             if valid == 0:
                 l_ib_info.config(text=f'Se agregó correctamente\nLa banda {e_ib_name.get()} ({e_ib_code.get()})', fg='black')
                 disable_widgets([e_ib_name, e_ib_institution, e_ib_code, c_ib_category, b_ib_acept, b_ib_cancel])
-                mainroot.after(ms=2500, func= exit_form)
+                mainroot.after(ms=1200, func= exit_form)
 
             else:
                 l_ib_info.config(text=valid, fg='red')

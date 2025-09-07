@@ -1,6 +1,3 @@
-import tkinter as tk
-
-
 class BandaParticipante:
     def __init__(self, nombre, institucion, codigo):
         self.nombre = nombre
@@ -43,6 +40,7 @@ class BandaEscolar(BandaParticipante):
             return "Error debe ser un numero"
 
     def suma_total(self):
+        self.__puntaje_total = 0
         for suma in self._puntaje.values():
             self.__puntaje_total += suma
 
