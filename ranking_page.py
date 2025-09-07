@@ -35,10 +35,6 @@ def page_show_ranking(mainroot, ranking_frame, main_frame):
     bandas = [band for band in mainroot.concurso.bandas.values()]
     tabla_bands = [["Puesto","Nombre", "Institución", "Puntaje Final"]]
 
-    sorted_bands = list(sorted(bandas, key=lambda point: point.puntaje_total, reverse=True))
-    for n,iterar in enumerate(sorted_bands, 1):
-        tabla_bands.append([n,iterar.nombre, iterar.institucion, iterar.puntaje_total])
-
     f_tabla_in_canvas = Tabla(f_canvas_table, len(tabla_bands), len(tabla_bands[0]), tabla_bands, border_width=1)
     c_tabla.config(scrollregion=c_tabla.bbox("all"))
     f_tabla_in_canvas.confi_colum(0, 7)#Configurar tamaño columnas
@@ -88,3 +84,31 @@ def page_show_ranking(mainroot, ranking_frame, main_frame):
     if len(bandas_primaria) == 0: b_primaria.config(state='disabled')
     if len(bandas_basico) == 0: b_basico.config(state='disabled')
     if len(bandas_bach) == 0: b_bachillerato.config(state='disabled')
+
+    def filter_table(table, list_band, gen=False):
+        nonlocal f_tabla_in_canvas
+        table.destroy_table()
+        for celda in f_canvas_table.winfo_children(): celda.destroy()
+
+        if gen:
+            tabla_bands = [["Puesto", "Nombre", "Institución", 'Categoria', "Puntaje Final"]]
+            sorted_bands = list(sorted(list_band, key=lambda point: point.puntaje_total, reverse=True))
+            for n, iterar in enumerate(sorted_bands, 1):
+                tabla_bands.append([n, iterar.nombre, iterar.institucion, iterar.categoria, iterar.puntaje_total])
+        else:
+            tabla_bands = [["Puesto", "Nombre", "Institución", "Puntaje Final"]]
+            sorted_bands = list(sorted(list_band, key=lambda point: point.puntaje_total, reverse=True))
+            for n, iterar in enumerate(sorted_bands, 1):
+                tabla_bands.append([n, iterar.nombre, iterar.institucion, iterar.puntaje_total])
+
+
+        table = Tabla(f_canvas_table, len(tabla_bands), len(tabla_bands[0]), tabla_bands, border_width=1)
+        table.confi_colum(0, 7)  # Configurar tamaño columnas
+        table.confi_colum(1, 15)
+        table.confi_colum(2, 15)
+        table.confi_colum(3, 11)
+
+    b_gen.config(command=lambda:filter_table(f_tabla_in_canvas, bandas, True))
+    b_primaria.config(command=lambda:filter_table(f_tabla_in_canvas, bandas_primaria))
+    b_basico.config(command=lambda:filter_table(f_tabla_in_canvas, bandas_basico))
+    b_bachillerato.config(command=lambda:filter_table(f_tabla_in_canvas, bandas_bach))
