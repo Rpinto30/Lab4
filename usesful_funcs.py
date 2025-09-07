@@ -32,8 +32,7 @@ class Tabla: #tabla es inspirada de imagen de Google
         for i in range(total_rows):
             for j in range(total_columns):
 
-                self.e = tk.Entry(master, width=ancho, fg='blue', font = ("Arial", 16))
-
+                self.e = tk.Entry(master, width=ancho, fg='blue', font = ("Arial", 50))
                 self.e.grid(row=i, column=j)
                 self.e.insert(tk.END, lst_[i][j])
 
