@@ -1,11 +1,19 @@
+import tkinter
+
 from usesful_funcs import *
 from tkinter.ttk import Combobox, Scale
+from tkinter import PhotoImage
 
 def rate_form(mainroot, rate_frame, main_frame):
     mainroot.change_frame(rate_frame)
     f_combo_select = tk.Frame(rate_frame, height=120)
     f_combo_select.pack_propagate(False)
     f_combo_select.pack(anchor='center', fill='x')
+
+    photo = PhotoImage(file=r'imagenes/prueba_rate.gif', width=370, height=480)
+    l_photo = tk.Label(rate_frame, image=photo)
+    l_photo.image = photo
+    l_photo.pack()
 
     bands = [band for band in mainroot.concurso.bandas.values()]
     l_header = tk.Label(f_combo_select, text= 'Calificar Banda', font=('Arial',30))
@@ -19,6 +27,7 @@ def rate_form(mainroot, rate_frame, main_frame):
 
     def pack_rate_forms(event):
         c_list_bands.config(state='disable')
+        l_photo.pack_forget()
         l_select_info.pack_forget()
         f_combo_select.config(height=75)
 
@@ -30,8 +39,8 @@ def rate_form(mainroot, rate_frame, main_frame):
         f_acept.pack_propagate(False)
         f_acept.pack(anchor='s', expand=1)
 
-        l_header_rate = tk.Label(f_rate, text= f'Califica a {c_list_bands.get()} según cada criterio', font=('Arial',12))
-        l_header_rate.pack(pady=5)
+        l_info_rate = tk.Label(f_rate, text= f'Califica a {c_list_bands.get()} según cada criterio', font=('Arial',12))
+        l_info_rate.pack(pady=5)
         #LABELS
         font_labels = ('Arial', 16, 'bold')
         l_ritmo = tk.Label(text='Ritmo', font=font_labels)
@@ -41,12 +50,12 @@ def rate_form(mainroot, rate_frame, main_frame):
         l_puntualidad = tk.Label(text='Puntualidad', font=font_labels)
 
         #https://python--course-eu.translate.goog/tkinter/sliders-in-tkinter.php?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=es&_x_tr_pto=tc
-        s_ritmo = tk.Scale(from_=0, to=10, orient='horizontal', length=300, width=8)
-        s_uniformidad = tk.Scale(from_=0, to=10, orient='horizontal', length=300, width=8)
-        s_coreografia = tk.Scale(from_=0, to=10, orient='horizontal', length=300, width=8)
-        s_alineacion = tk.Scale(from_=0, to=10, orient='horizontal', length=300, width=8)
-        s_puntualidad = tk.Scale(from_=0, to=10, orient='horizontal', length=300, width=8)
-
+        s_ritmo = tk.Scale(from_=0, to=10, orient='horizontal', length=300, width=10)
+        s_uniformidad = tk.Scale(from_=0, to=10, orient='horizontal', length=300, width=10)
+        s_coreografia = tk.Scale(from_=0, to=10, orient='horizontal', length=300, width=10)
+        s_alineacion = tk.Scale(from_=0, to=10, orient='horizontal', length=300, width=10)
+        s_puntualidad = tk.Scale(from_=0, to=10, orient='horizontal', length=300, width=10)
+        scalers = [s_ritmo, s_uniformidad, s_coreografia, s_alineacion, s_puntualidad]
         #PACK
         pack_create_line(f_rate, l_ritmo, s_ritmo, _pady=10, width=500, height=35)
         pack_create_line(f_rate, l_uniformidad, s_uniformidad, _pady=10, width=500, height=35)
@@ -62,9 +71,13 @@ def rate_form(mainroot, rate_frame, main_frame):
         def cancel():
             if b_cancel.cget('text') == 'Salir':
                 b_mod.config(state='disabled')
+                for sc in scalers:sc.config(state='disabled')
+                l_info_rate.config(text='¿Estas seguro que deseas salir?')
                 b_cancel.config(text='No')
                 b_acept.config(text='Sí')
             else:
+                for sc in scalers: sc.config(state='normal')
+                l_info_rate.config(text=f'Califica a {c_list_bands.get()} según cada criterio')
                 b_mod.config(state='normal')
                 b_cancel.config(text='Salir')
                 b_acept.config(text='Aceptar')
@@ -78,11 +91,13 @@ def rate_form(mainroot, rate_frame, main_frame):
         def modiffy():
             c_list_bands.pack_forget()
             l_select_info.pack()
+            c_list_bands.config(state='readonly')
+            c_list_bands.set('')
             c_list_bands.pack(expand=True, anchor="center")
             f_combo_select.config(height=120)
-
             f_acept.destroy()
             f_rate.destroy()
+            l_photo.pack()
 
         b_acept.config(command=acept)
         b_mod.config(command=modiffy)
@@ -91,6 +106,5 @@ def rate_form(mainroot, rate_frame, main_frame):
         b_acept.pack(anchor='center', side="left", padx=65)
         b_mod.pack(anchor='center', side="left", padx=65)
         b_cancel.pack(anchor='center', side="left", padx=65)
-    pack_rate_forms(None)
     #https://python-course.eu/tkinter/events-and-binds-in-tkinter.php
     c_list_bands.bind("<<ComboboxSelected>>", lambda event: pack_rate_forms(event))
