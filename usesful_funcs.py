@@ -27,12 +27,12 @@ def enable_widgets(widgets:list):
 def return_main(mainroot, principal_frame): mainroot.change_frame(principal_frame)
 
 class Tabla: #tabla es inspirada de imagen de Google
-    def __init__(self, master, total_rows, total_columns, lst_, ancho = 11):
+    def __init__(self, master, total_rows, total_columns, lst_, ancho = 11, alto=14):
 
         for i in range(total_rows):
             for j in range(total_columns):
 
-                self.e = tk.Entry(master, width=ancho, fg='blue', font = ("Arial", 50))
+                self.e = tk.Entry(master, width=ancho, fg='blue', font = ("Arial", alto))
                 self.e.grid(row=i, column=j)
                 self.e.insert(tk.END, lst_[i][j])
 

@@ -13,4 +13,9 @@ def rate_form(mainroot, rate_frame, main_frame):
     c_list_bands = Combobox(f_combo_select, state='readonly',values=[b.nombre for b in bands], width=30, font=('Arial', 15))
     c_list_bands.pack(expand=True, anchor="center")
 
-    c_list_bands.bind("<<ComboboxSelected>>", lambda _: print("Hola"))
+    def pack_rate_forms():
+        print("Hoa")
+
+    #Segun investigación rápida, para evitar el event de bind, usamos _ para evitar colocarlo
+    #https://python-course.eu/tkinter/events-and-binds-in-tkinter.php
+    c_list_bands.bind("<<ComboboxSelected>>", lambda _: pack_rate_forms)
