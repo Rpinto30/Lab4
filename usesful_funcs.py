@@ -28,13 +28,21 @@ def enable_widgets(widgets:list):
 def return_main(mainroot, principal_frame): mainroot.change_frame(principal_frame)
 
 class Tabla: #tabla es inspirada de imagen de Google
-    def __init__(self, master, total_rows, total_columns, lst_, ancho = 11, alto=14):
-
+    def __init__(self, master, total_rows, total_columns, lst_, ancho = 11, alto=14, border_width=2):
+        self.__table = []
         for i in range(total_rows):
+            row = []
             for j in range(total_columns):
+                e = tk.Entry(master, width=ancho, fg='blue', font = ("Arial", alto), borderwidth=border_width, relief="solid")
+                if i == 0: e.config(readonlybackground='#A9B1D1')
+                else: e.config(readonlybackground='#D5D9E8')
+                e.grid(row=i, column=j)
+                e.insert(tk.END, lst_[i][j])
+                e.config(state='readonly')
+                row.append(e)
+            self.__table.append(row)
 
-                self.e = tk.Entry(master, width=ancho, fg='blue', font = ("Arial", alto))
-                self.e.grid(row=i, column=j)
-                self.e.insert(tk.END, lst_[i][j])
-
-                self.e.config(state='readonly')
+    def confi_colum(self, index, width_=1):
+        for fila in self.__table:
+            if index < len(fila):
+                fila[index].config(width=width_)

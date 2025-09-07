@@ -41,7 +41,8 @@ def page_show_info(mainroot, list_frame, main_frame):
     for iterar in bandas:
         tabla_bands.append([iterar.codigo, iterar.nombre, iterar.institucion, iterar.categoria, iterar.puntaje_total])
 
-    f_tabla = Tabla(f_canvas_table, len(tabla_bands), len(tabla_bands[0]), tabla_bands )
+    f_tabla = Tabla(f_canvas_table, len(tabla_bands), len(tabla_bands[0]), tabla_bands, border_width=2)
     c_tabla.config(scrollregion=c_tabla.bbox("all")) #Configurar el tamaño de la tabla
+
 
 

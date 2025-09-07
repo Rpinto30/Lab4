@@ -15,7 +15,6 @@ class BandaParticipante:
     def mostrar_info(self):
         return f"Nombre de la banda {self.nombre} | Institucion {self._institucion} | Codigo {self._codigo}"
 
-
 class BandaEscolar(BandaParticipante):
     def __init__(self, nombre, institucion, codigo, categoria, puntaje):
         super().__init__(nombre, institucion, codigo)
@@ -87,8 +86,3 @@ class Concurso:
     def listar_bandas(self):
         for banda in self.bandas.values():
             banda.mostrar_info()
-
-
-
-
-

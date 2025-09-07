@@ -73,13 +73,12 @@ IMAGES_BUTTONS_PRINCIPAL_MENU.extend([
 buttons_frame = tk.Frame(principal_frame, bg = BACKGROUND_PRINCIPAL)
 buttons_frame.pack(pady=15)
 
-button_inscr_bad = tk.Button(buttons_frame,
-                             command=lambda:insc_form(root, inscribe_frame,principal_frame))
-button_rate = tk.Button(buttons_frame,
+button_inscr_bad = tk.Button(buttons_frame)
+button_rate = tk.Button(buttons_frame, state='disabled',
                         command=lambda:rate_form(root, rate_frame, principal_frame))
-button_list_bands = tk.Button(buttons_frame,
+button_list_bands = tk.Button(buttons_frame,state='disabled',
                               command=lambda: page_show_info(root, list_frame, principal_frame))
-button_gen_rank = tk.Button(buttons_frame,
+button_gen_rank = tk.Button(buttons_frame,state='disabled',
                             command=lambda: page_show_ranking(root, ranking_frame, principal_frame))
 #AGREGAR BOTONES A FRAME DE BOTONES EN EL MENÚ PRINCIPAL
 BUTTONS_PRINCIPAL_MENU.extend([button_inscr_bad, button_rate, button_list_bands, button_gen_rank])
@@ -87,6 +86,8 @@ for n,i in enumerate(BUTTONS_PRINCIPAL_MENU):
     i.configure(bg=BACKGROUND_PRINCIPAL, borderwidth=1,highlightthickness=0,relief="flat",
                 image=IMAGES_BUTTONS_PRINCIPAL_MENU[n], cursor='hand2' )
     i.pack(pady=10)
+
+button_inscr_bad.config(command=lambda:insc_form(root, inscribe_frame,principal_frame, BUTTONS_PRINCIPAL_MENU))
 
 try:
     root.mainloop()

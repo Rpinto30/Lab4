@@ -144,7 +144,6 @@ def rate_form(mainroot, rate_frame, main_frame):
                     scalers[4].set(mainroot.concurso.bandas[band.codigo].puntaje['puntualidad'])
                     break
 
-
     def check_modiffy_band():
         m_question_entry, modify = True, False
         for band in bands:
