@@ -5,6 +5,8 @@ from tkinter import PhotoImage
 #IMPORTACION DE CLASES
 from Clases import Concurso
 from inscription_band import insc_form
+from info_page import page_show_info
+from rate_page import rate_form
 
 def show():
     for i,j in root.concurso.bandas.items():
@@ -43,14 +45,19 @@ BACKGROUND_PRINCIPAL = "#ffffff"
 root = Window()
 principal_frame = tk.Frame(root)
 root.change_frame(principal_frame)
-
 principal_frame.config(bg=BACKGROUND_PRINCIPAL, width=800, height=500)
 
 inscribe_frame = tk.Frame(root)
 inscribe_frame.config(bg='#ad3e3e',width=1000, height=500)
 
-register_frame = tk.Frame(root)
-register_frame.config(bg='#449147',width=1000, height=500)
+rate_frame = tk.Frame(root)
+rate_frame.config(bg='#449147', width=1000, height=500)
+
+list_frame = tk.Frame(root)
+list_frame.config(bg='#6C74B8',width=1000, height=500)
+
+ranking_frame = tk.Frame(root)
+ranking_frame.config(bg='#B8B76C',width=1000, height=500)
 
 #-----------------------PRINCIPAL------------------
 etiqueta = tk.Label(
@@ -59,7 +66,7 @@ etiqueta = tk.Label(
     font=("Arial", 20, "bold"),
     justify="center"
 )
-etiqueta.pack(pady=50)#377 42
+etiqueta.pack(pady=50)
 IMAGES_BUTTONS_PRINCIPAL_MENU.extend([
     PhotoImage(file = r"prubea boton.png",height=42, width=380),
     PhotoImage(file=r"prubea boton.png", height=42, width=380),
@@ -67,21 +74,13 @@ IMAGES_BUTTONS_PRINCIPAL_MENU.extend([
     PhotoImage(file=r"prubea boton.png", height=42, width=380)
 ])
 button_inscr_bad = tk.Button(principal_frame, command=lambda:insc_form(root, inscribe_frame,principal_frame))
-button_register = tk.Button(principal_frame, command=lambda:root.change_frame(register_frame))
-button_list_bands = tk.Button(principal_frame, command=show)
-button_gen_rank = tk.Button(principal_frame)
-BUTTONS_PRINCIPAL_MENU.extend([button_inscr_bad, button_register, button_list_bands, button_gen_rank])
+button_rate = tk.Button(principal_frame, command=lambda:rate_form(root, rate_frame, principal_frame))
+button_list_bands = tk.Button(principal_frame, command=lambda: page_show_info(root, list_frame, principal_frame))
+button_gen_rank = tk.Button(principal_frame, command=lambda: page_show_info(root, ranking_frame, principal_frame))
+BUTTONS_PRINCIPAL_MENU.extend([button_inscr_bad, button_rate, button_list_bands, button_gen_rank])
 for n,i in enumerate(BUTTONS_PRINCIPAL_MENU):
     i.configure(bg=BACKGROUND_PRINCIPAL, borderwidth=1,highlightthickness=0,relief="flat",
                 image=IMAGES_BUTTONS_PRINCIPAL_MENU[0], cursor='hand2' )
     i.pack(pady=10)
 
-
-
-#------------------------REGISTER NOTE--------------
-lb = tk.Label(register_frame,
-    text="HOLAAA",
-    font=("Arial", 20, "bold"),
-    justify="center")
-lb.pack()
 root.mainloop()

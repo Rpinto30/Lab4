@@ -10,7 +10,7 @@ class BandaParticipante:
     def mostrar_info(self):
         return f"Nombre de la banda {self.nombre} | Institucion {self._institucion} | Codigo {self._codigo}"
 
-categorias = ["primaria","basico", "bachillerato"]
+
 class BandaEscolar(BandaParticipante):
     def __init__(self, nombre, institucion, codigo, categoria, puntaje):
         super().__init__(nombre, institucion, codigo)
@@ -22,7 +22,7 @@ class BandaEscolar(BandaParticipante):
         return self._categoria
 
     def set_categoria(self, categori):
-        if categori in categorias:
+        if categori in ["Primaria", "Básico", "Bachillerato"]:
             self._categoria = categori
 
     def registrar_puntajes(self, puntos):
