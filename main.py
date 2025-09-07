@@ -73,6 +73,7 @@ IMAGES_BUTTONS_PRINCIPAL_MENU.extend([
     PhotoImage(file=r"imagenes\btt_ranking.png", height=60, width=600)
 ])
 
+
 buttons_frame = tk.Frame(principal_frame, bg = BACKGROUND_PRINCIPAL)
 buttons_frame.pack(pady=15)
 
