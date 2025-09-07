@@ -1,5 +1,6 @@
 from usesful_funcs import *
 from tkinter.ttk import Scrollbar
+from tkinter import PhotoImage
 
 def page_show_ranking(mainroot, ranking_frame, main_frame):
     mainroot.change_frame(ranking_frame)
@@ -32,7 +33,7 @@ def page_show_ranking(mainroot, ranking_frame, main_frame):
 
 
     bandas = [band for band in mainroot.concurso.bandas.values()]
-    tabla_bands = [["Posición","Nombre", "Institución", "Puntaje Final"]]
+    tabla_bands = [["Puesto","Nombre", "Institución", "Puntaje Final"]]
 
     sorted_bands = list(sorted(bandas, key=lambda point: point.puntaje_total, reverse=True))
     for n,iterar in enumerate(sorted_bands, 1):
@@ -40,5 +41,37 @@ def page_show_ranking(mainroot, ranking_frame, main_frame):
 
     f_tabla_in_canvas = Tabla(f_canvas_table, len(tabla_bands), len(tabla_bands[0]), tabla_bands, border_width=1)
     c_tabla.config(scrollregion=c_tabla.bbox("all"))
-    f_tabla_in_canvas.confi_colum() #Configurar tamaño columnas
+    f_tabla_in_canvas.confi_colum(0, 7)#Configurar tamaño columnas
+    f_tabla_in_canvas.confi_colum(1, 15)
+    f_tabla_in_canvas.confi_colum(2, 15)
+    f_tabla_in_canvas.confi_colum(3, 11)
+
+    #BOTONES
+    photo = PhotoImage(file=r'imagenes/prueba_ranking.gif', width=430, height=170)
+    l_photo = tk.Label(f_options, image=photo)
+    l_photo.image = photo
+    l_photo.pack()
+
+    BG_FRAME = '#726899'
+    f_buttons = tk.Frame(f_options, bg=BG_FRAME)
+    f_buttons.pack(anchor='center', expand=1, fill='y')
+
+    l_info = tk.Label(f_buttons, text='Selecciona para generar un ranking', bg=BG_FRAME, font=('Arial', 12))
+    FONT_L = ('Arial', 15)
+    WIDTH_B = 18
+
+    b_gen = tk.Button(f_buttons, text='General', width=WIDTH_B, font=FONT_L)
+
+    b_primaria = tk.Button(f_buttons, text='Primaria', width=WIDTH_B, font=FONT_L)
+    b_basico = tk.Button(f_buttons, text='Básico', width=WIDTH_B,font=FONT_L)
+    b_bachillerato = tk.Button(f_buttons, text='Bachillerato', width=WIDTH_B,font=FONT_L)
+    b_salir = tk.Button(f_buttons, text='Salir', width=WIDTH_B,font=FONT_L, command=lambda:return_main(mainroot,main_frame))
+
+    l_info.pack(pady=5)
+    b_gen.pack(pady=5, padx=50)
+    b_primaria.pack(pady=5)
+    b_basico.pack(pady=5)
+    b_bachillerato.pack(pady=5)
+    b_salir.pack(pady=25)
+
 
