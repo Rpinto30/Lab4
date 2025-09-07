@@ -69,13 +69,15 @@ class Concurso:
         if entry_nombre.strip() == "":
             if error != '': error += ','
             error += " Nombre vacío"
+        elif entry_nombre.strip() in [banda.nombre for banda in self.bandas.values()]:
+            if error != '': error += ','
+            error += " Nombre ya registrado"
         if entry_institucion.strip() == "":
             if error != '': error += ','
             error += " Institución vacía"
         if entry_categoria.strip() == "":
             if error != '': error += ','
             error += " Categoria vacia"
-
         if error == '':
             self.bandas[entry_codigo] = BandaEscolar(entry_nombre, entry_institucion, entry_codigo, entry_categoria)
             return 0

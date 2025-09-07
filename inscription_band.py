@@ -1,3 +1,4 @@
+import tkinter
 from tkinter import PhotoImage
 from usesful_funcs import *
 
@@ -26,12 +27,14 @@ def insc_form(mainroot, inscription_frame, main_frame, buttons):
     #LABELS
     l_font, e_font = ('Arial', 12, 'bold'), ('Arial',14)
     l_ib_name = tk.Label(text= 'Nombre de tu banda', font=l_font)
-    l_ib_code = tk.Label(text='Codigo para tu banda', font=l_font)
+    l_ib_code = tk.Label(text='Codigo de tu banda', font=l_font)
     l_ib_institution = tk.Label(text='Instutición de tu banda', font=l_font)
     l_ib_category = tk.Label(text='Categoria para tu banda', font=l_font)
     #ENTRY
+    code = tk.StringVar()
+    code.set(f"COD.{len(mainroot.concurso.bandas)-1:03d}")
     e_ib_name = tk.Entry(width=25, font=e_font)
-    e_ib_code = tk.Entry(width=25, font=e_font)
+    e_ib_code = tk.Entry(width=25, font=e_font, state='disabled', cursor='x_cursor', textvariable=code)
     e_ib_institution = tk.Entry(width=25, font=e_font)
     #COMBOBOX
     c_ib_category = Combobox(width=23, state='readonly', font=e_font,
@@ -78,8 +81,8 @@ def insc_form(mainroot, inscription_frame, main_frame, buttons):
                            command=verify_cancel, cursor='hand2')
     # PACK
     l_ib_title.pack(pady=30)
+    pack_create_line(f_ib_op, l_ib_code, e_ib_code, _pady=pad_options[1], width=480, height=30)  # CODIGO
     pack_create_line(f_ib_op,l_ib_name, e_ib_name,_pady= pad_options[1], width=480, height=30) #NOMBRE
-    pack_create_line(f_ib_op,l_ib_code, e_ib_code, _pady= pad_options[1], width=480, height=30) #CODIGO
     pack_create_line(f_ib_op,l_ib_institution, e_ib_institution,_pady= pad_options[1], width=480, height=30) #INSTITUCION
     pack_create_line(f_ib_op,l_ib_category, c_ib_category, _pady= pad_options[1], width=480, height=30) #CATEGORIA
 
