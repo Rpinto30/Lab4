@@ -28,7 +28,7 @@ def insc_form(mainroot, inscription_frame, main_frame):
     l_ib_institution = tk.Label(text='Instutición de tu banda', font=l_font)
     l_ib_category = tk.Label(text='Categoria para tu banda', font=l_font)
     #ENTRY
-    e_ib_name = tk.Entry(width=25, font=e_font, state='normal')
+    e_ib_name = tk.Entry(width=25, font=e_font)
     e_ib_code = tk.Entry(width=25, font=e_font)
     e_ib_institution = tk.Entry(width=25, font=e_font)
     #COMBOBOX
@@ -76,12 +76,12 @@ def insc_form(mainroot, inscription_frame, main_frame):
                            command=verify_cancel, cursor='hand2')
     # PACK
     l_ib_title.pack(pady=30)
-    pack_create_line(f_ib_op,l_ib_name, e_ib_name, pad_options[0], pad_options[1], 460,30) #NOMBRE
-    pack_create_line(f_ib_op,l_ib_code, e_ib_code, pad_options[0], pad_options[1], 460,30) #CODIGO
-    pack_create_line(f_ib_op,l_ib_institution, e_ib_institution, pad_options[0], pad_options[1], 460,30) #INSTITUCION
-    pack_create_line(f_ib_op,l_ib_category, c_ib_category, pad_options[0], pad_options[1], 460,30) #CATEGORIA
+    pack_create_line(f_ib_op,l_ib_name, e_ib_name,_pady= pad_options[1], width=480, height=30) #NOMBRE
+    pack_create_line(f_ib_op,l_ib_code, e_ib_code, _pady= pad_options[1], width=480, height=30) #CODIGO
+    pack_create_line(f_ib_op,l_ib_institution, e_ib_institution,_pady= pad_options[1], width=480, height=30) #INSTITUCION
+    pack_create_line(f_ib_op,l_ib_category, c_ib_category, _pady= pad_options[1], width=480, height=30) #CATEGORIA
 
     l_ib_info.pack(pady=5)
-    pack_create_line(f_ib_acept, b_ib_acept, b_ib_cancel, width=460, height=40, _pady=20, bg='red')
+    pack_create_line(f_ib_acept, b_ib_acept, b_ib_cancel, width=480, height=40, _pady=20, bg='red')
 
 
