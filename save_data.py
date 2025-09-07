@@ -1,7 +1,7 @@
 from Clases import BandaEscolar
 
 def save_data(diction:dict):
-    with open(f'estu_data.txt', 'w', encoding='utf-8') as data:
+    with open(f'data.txt', 'w', encoding='utf-8') as data:
         for i in diction.values():
             data.write(
                 f"{i.nombre.lower().strip()}:{i.institucion}:{i.codigo}:{i.categoria}:{i.puntaje_total}\n")
@@ -10,7 +10,7 @@ def save_data(diction:dict):
 
 def load_data(diction:dict):
     try:
-        with open(f'estu_data.txt', 'r', encoding='utf-8') as data:
+        with open(f'data.txt', 'r', encoding='utf-8') as data:
             for line in data:
                 line = line.strip()
                 if line:
@@ -28,4 +28,4 @@ def load_data(diction:dict):
                     diction[codigo] = b
     except FileNotFoundError:
         # print("nO DATOS")
-        with open(f'estu_data.txt', 'w', encoding='utf-8') as data:pass
+        with open(f'data.txt', 'w', encoding='utf-8') as data:pass
