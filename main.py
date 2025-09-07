@@ -60,14 +60,14 @@ list_frame.config(bg='#6C74B8',width=1000, height=500)
 ranking_frame = tk.Frame(root)
 ranking_frame.config(bg='#B8B76C',width=1000, height=500)
 #-----------------------PRINCIPAL------------------
-img_header = PhotoImage(file=r'images\header.png', width=1000, height=131)
+img_header = PhotoImage(file=r'imagenes\header.png', width=1000, height=131)
 etiqueta = tk.Label(principal_frame,image=img_header)
 etiqueta.pack(pady=5)
 IMAGES_BUTTONS_PRINCIPAL_MENU.extend([
-    PhotoImage(file = r"images\btt_inscrb.png",height=60, width=600),
-    PhotoImage(file=r"images\btt_rate.png", height=60, width=600),
-    PhotoImage(file=r"images\prubea boton.png", height=60, width=600),
-    PhotoImage(file=r"images\prubea boton.png", height=60, width=600)
+    PhotoImage(file = r"imagenes\btt_inscrb.png",height=60, width=600),
+    PhotoImage(file=r"imagenes\btt_rate.png", height=60, width=600),
+    PhotoImage(file=r"imagenes\prubea boton.png", height=60, width=600),
+    PhotoImage(file=r"imagenes\prubea boton.png", height=60, width=600)
 ])
 
 buttons_frame = tk.Frame(principal_frame, bg = BACKGROUND_PRINCIPAL)
