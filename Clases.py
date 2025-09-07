@@ -16,7 +16,7 @@ class BandaParticipante:
         return f"Nombre de la banda {self.nombre} | Institucion {self._institucion} | Codigo {self._codigo}"
 
 class BandaEscolar(BandaParticipante):
-    def __init__(self, nombre, institucion, codigo, categoria, puntaje):
+    def __init__(self, nombre, institucion, codigo, categoria):
         super().__init__(nombre, institucion, codigo)
         self._categoria = categoria
         self._puntaje = {"ritmo": 0, "uniformidad": 0, "coreografia": 0, "alineacion": 0, "puntualidad": 0}
@@ -77,7 +77,7 @@ class Concurso:
             error += " Categoria vacia"
 
         if error == '':
-            self.bandas[entry_codigo] = BandaEscolar(entry_nombre, entry_institucion, entry_codigo, entry_categoria, 0)
+            self.bandas[entry_codigo] = BandaEscolar(entry_nombre, entry_institucion, entry_codigo, entry_categoria)
             return 0
         else:
             error = "Error: " + error

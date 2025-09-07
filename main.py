@@ -7,6 +7,7 @@ from inscription_band import insc_form
 from info_page import page_show_info
 from rate_page import rate_form
 from ranking_page import page_show_ranking
+from save_data import load_data
 
 def show():
     for i,j in root.concurso.bandas.items():
@@ -24,7 +25,9 @@ class Window(tk.Tk):
         self.resizable(False,False)
         self.grid_rowconfigure(0, weight=1)
         self.grid_columnconfigure(0, weight=1)
+
         self.concurso = Concurso()
+        load_data(self.concurso.bandas)
 
         self.CURRENT_FRAME = None
         self.protocol("WM_DELETE_WINDOW", salir)
@@ -74,12 +77,18 @@ buttons_frame = tk.Frame(principal_frame, bg = BACKGROUND_PRINCIPAL)
 buttons_frame.pack(pady=15)
 
 button_inscr_bad = tk.Button(buttons_frame)
-button_rate = tk.Button(buttons_frame, state='disabled',
+button_rate = tk.Button(buttons_frame, state='normal',
                         command=lambda:rate_form(root, rate_frame, principal_frame))
-button_list_bands = tk.Button(buttons_frame,state='disabled',
+button_list_bands = tk.Button(buttons_frame,state='normal',
                               command=lambda: page_show_info(root, list_frame, principal_frame))
 button_gen_rank = tk.Button(buttons_frame,state='normal',
                             command=lambda: page_show_ranking(root, ranking_frame, principal_frame))
+
+if not root.concurso.bandas:
+    button_rate.config(state='disabled')
+    button_list_bands.config(state='disabled')
+    button_gen_rank.config(state='disabled')
+
 #AGREGAR BOTONES A FRAME DE BOTONES EN EL MENÚ PRINCIPAL
 BUTTONS_PRINCIPAL_MENU.extend([button_inscr_bad, button_rate, button_list_bands, button_gen_rank])
 for n,i in enumerate(BUTTONS_PRINCIPAL_MENU):

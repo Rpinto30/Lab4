@@ -3,6 +3,8 @@ from tkinter.ttk import Combobox
 from tkinter import PhotoImage
 from tkinter import messagebox
 
+from save_data import save_data
+
 def rate_form(mainroot, rate_frame, main_frame):
     mainroot.change_frame(rate_frame)
     f_combo_select = tk.Frame(rate_frame, height=160)
@@ -107,6 +109,7 @@ def rate_form(mainroot, rate_frame, main_frame):
                         mainroot.concurso.bandas[band.codigo].registrar_puntajes(int(s_puntualidad.get()),'puntualidad')
                         mainroot.concurso.bandas[band.codigo].suma_total()
                         break
+                save_data(mainroot.concurso.bandas)
                 mainroot.after(ms=1000, func=exit_frame)
             else:
                 return_main(mainroot, main_frame)

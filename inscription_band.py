@@ -1,6 +1,7 @@
 from tkinter import PhotoImage
 from usesful_funcs import *
 
+from save_data import save_data
 
 def insc_form(mainroot, inscription_frame, main_frame, buttons):
     mainroot.change_frame(inscription_frame)
@@ -47,6 +48,7 @@ def insc_form(mainroot, inscription_frame, main_frame, buttons):
                 l_ib_info.config(text=f'Se agregó correctamente\nLa banda {e_ib_name.get()} ({e_ib_code.get()})', fg='black')
                 disable_widgets([e_ib_name, e_ib_institution, e_ib_code, c_ib_category, b_ib_acept, b_ib_cancel])
                 for but in buttons: but.config(state='normal')
+                save_data(mainroot.concurso.bandas)
                 mainroot.after(ms=1200, func= exit_form)
             else:
                 l_ib_info.config(text=valid, fg='red')
