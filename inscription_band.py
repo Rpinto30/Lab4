@@ -39,7 +39,6 @@ def insc_form(mainroot, inscription_frame, main_frame, buttons):
 
     #FUNCIONES
     def validar_inscripcion():
-        print( b_ib_acept.cget('text'))
         if b_ib_acept.cget('text') == 'Aceptar':
             valid = mainroot.concurso.inscribir_banda(
                 e_ib_name.get(), e_ib_institution.get(), e_ib_code.get(), c_ib_category.get()
