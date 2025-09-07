@@ -23,9 +23,12 @@ def page_show_ranking(mainroot, ranking_frame, main_frame):
     hbar.pack(side="bottom", fill="x")
     hbar.config(command=c_tabla.xview)
     # CONFIG AND PACK TABLE
+    l_info_table = tk.Label(f_table, text='Selecciona una Categoria', font=('Arial',15))
+    l_info_table.pack(pady=20)
+
     c_tabla.config(xscrollcommand=hbar.set, yscrollcommand=vbar.set)
-    c_tabla.pack(side="right", fill="both", expand=True)
-    f_canvas_table = tk.Frame(c_tabla)  # Frame dentro del canvas para mover y meter widgets
+    c_tabla.pack(fill="both", expand=True)
+    f_canvas_table = tk.Frame(f_table)  # Frame dentro del canvas para mover y meter widgets
     c_tabla.create_window((0, 0), window=f_canvas_table, anchor="nw")
     # Usado para modificar el tamaño del scroll cuando se actualice la tabla, uso lambda para no crear otra función más xd
     f_canvas_table.bind("<Configure>",
@@ -85,8 +88,9 @@ def page_show_ranking(mainroot, ranking_frame, main_frame):
     if len(bandas_basico) == 0: b_basico.config(state='disabled')
     if len(bandas_bach) == 0: b_bachillerato.config(state='disabled')
 
-    def filter_table(table, list_band, gen=False):
+    def filter_table(table, list_band, text='', gen=False):
         nonlocal f_tabla_in_canvas
+        l_info_table.config(text=text)
         table.destroy_table()
         for celda in f_canvas_table.winfo_children(): celda.destroy()
 
@@ -108,7 +112,7 @@ def page_show_ranking(mainroot, ranking_frame, main_frame):
         table.confi_colum(2, 15)
         table.confi_colum(3, 11)
 
-    b_gen.config(command=lambda:filter_table(f_tabla_in_canvas, bandas, True))
-    b_primaria.config(command=lambda:filter_table(f_tabla_in_canvas, bandas_primaria))
-    b_basico.config(command=lambda:filter_table(f_tabla_in_canvas, bandas_basico))
-    b_bachillerato.config(command=lambda:filter_table(f_tabla_in_canvas, bandas_bach))
+    b_gen.config(command=lambda:filter_table(f_tabla_in_canvas, bandas, 'Ranking General', True))
+    b_primaria.config(command=lambda:filter_table(f_tabla_in_canvas, bandas_primaria, 'Ranking Primaria'))
+    b_basico.config(command=lambda:filter_table(f_tabla_in_canvas, bandas_basico, 'Ranking Básico'))
+    b_bachillerato.config(command=lambda:filter_table(f_tabla_in_canvas, bandas_bach, 'Ranking Bachillerato'))
