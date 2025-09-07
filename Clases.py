@@ -7,6 +7,14 @@ class BandaParticipante:
         self._institucion = institucion
         self._codigo = codigo
 
+    @property
+    def codigo(self):
+        return self._codigo
+
+    @property
+    def institucion(self):
+        return self._institucion
+
     def mostrar_info(self):
         return f"Nombre de la banda {self.nombre} | Institucion {self._institucion} | Codigo {self._codigo}"
 
