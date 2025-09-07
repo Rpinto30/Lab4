@@ -25,3 +25,16 @@ def enable_widgets(widgets:list):
         else: widget.config(state='normal')
 
 def return_main(mainroot, principal_frame): mainroot.change_frame(principal_frame)
+
+class Tabla: #tabla es inspirada de imagen de Google
+    def __init__(self, master, total_rows, total_columns, lst_, ancho = 11):
+
+        for i in range(total_rows):
+            for j in range(total_columns):
+
+                self.e = tk.Entry(master, width=ancho, fg='blue', font = ("Arial", 16))
+
+                self.e.grid(row=i, column=j)
+                self.e.insert(tk.END, lst_[i][j])
+
+                self.e.config(state='readonly')
