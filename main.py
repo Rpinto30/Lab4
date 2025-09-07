@@ -1,12 +1,12 @@
 import tkinter as tk
 from tkinter import PhotoImage
 
-
 #IMPORTACION DE CLASES
 from Clases import Concurso
 from inscription_band import insc_form
 from info_page import page_show_info
 from rate_page import rate_form
+from ranking_page import page_show_ranking
 
 def show():
     for i,j in root.concurso.bandas.items():
@@ -43,9 +43,10 @@ IMAGES_BUTTONS_PRINCIPAL_MENU = []
 BACKGROUND_PRINCIPAL = "#ffffff"
 
 root = Window()
+#APARTADO PARA LA CREACION DE LOS FRAMES PRINCIPALES
 principal_frame = tk.Frame(root)
 root.change_frame(principal_frame)
-principal_frame.config(bg=BACKGROUND_PRINCIPAL, width=800, height=500)
+principal_frame.config(bg=BACKGROUND_PRINCIPAL, width=1000, height=500)
 
 inscribe_frame = tk.Frame(root)
 inscribe_frame.config(bg='#ad3e3e',width=1000, height=500)
@@ -58,29 +59,35 @@ list_frame.config(bg='#6C74B8',width=1000, height=500)
 
 ranking_frame = tk.Frame(root)
 ranking_frame.config(bg='#B8B76C',width=1000, height=500)
-
 #-----------------------PRINCIPAL------------------
-etiqueta = tk.Label(
-    principal_frame,
-    text="Sistema de Inscripción y Evaluación de Bandas Escolares\nDesfile 15 de Septiembre - Quetzaltenango",
-    font=("Arial", 20, "bold"),
-    justify="center"
-)
-etiqueta.pack(pady=50)
+img_header = PhotoImage(file=r'images\header.png', width=1000, height=131)
+etiqueta = tk.Label(principal_frame,image=img_header)
+etiqueta.pack(pady=5)
 IMAGES_BUTTONS_PRINCIPAL_MENU.extend([
-    PhotoImage(file = r"prubea boton.png",height=42, width=380),
-    PhotoImage(file=r"prubea boton.png", height=42, width=380),
-    PhotoImage(file=r"prubea boton.png", height=42, width=380),
-    PhotoImage(file=r"prubea boton.png", height=42, width=380)
+    PhotoImage(file = r"images\btt_inscrb.png",height=60, width=600),
+    PhotoImage(file=r"images\btt_rate.png", height=60, width=600),
+    PhotoImage(file=r"images\prubea boton.png", height=60, width=600),
+    PhotoImage(file=r"images\prubea boton.png", height=60, width=600)
 ])
-button_inscr_bad = tk.Button(principal_frame, command=lambda:insc_form(root, inscribe_frame,principal_frame))
-button_rate = tk.Button(principal_frame, command=lambda:rate_form(root, rate_frame, principal_frame))
-button_list_bands = tk.Button(principal_frame, command=lambda: page_show_info(root, list_frame, principal_frame))
-button_gen_rank = tk.Button(principal_frame, command=lambda: page_show_info(root, ranking_frame, principal_frame))
+
+buttons_frame = tk.Frame(principal_frame, bg = BACKGROUND_PRINCIPAL)
+buttons_frame.pack(pady=15)
+
+button_inscr_bad = tk.Button(buttons_frame,
+                             command=lambda:insc_form(root, inscribe_frame,principal_frame))
+button_rate = tk.Button(buttons_frame,
+                        command=lambda:rate_form(root, rate_frame, principal_frame))
+button_list_bands = tk.Button(buttons_frame,
+                              command=lambda: page_show_info(root, list_frame, principal_frame))
+button_gen_rank = tk.Button(buttons_frame,
+                            command=lambda: page_show_ranking(root, ranking_frame, principal_frame))
+#AGREGAR BOTONES A FRAME DE BOTONES EN EL MENÚ PRINCIPAL
 BUTTONS_PRINCIPAL_MENU.extend([button_inscr_bad, button_rate, button_list_bands, button_gen_rank])
 for n,i in enumerate(BUTTONS_PRINCIPAL_MENU):
     i.configure(bg=BACKGROUND_PRINCIPAL, borderwidth=1,highlightthickness=0,relief="flat",
-                image=IMAGES_BUTTONS_PRINCIPAL_MENU[0], cursor='hand2' )
+                image=IMAGES_BUTTONS_PRINCIPAL_MENU[n], cursor='hand2' )
     i.pack(pady=10)
 
-root.mainloop()
+try:
+    root.mainloop()
+except Exception as e: print(e)

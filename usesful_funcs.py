@@ -10,7 +10,6 @@ def pack_create_line(master:tk.Frame, left_widget, right_widget, _padx=0, _pady=
     row.pack(pady=_pady)
     return row
 
-
 def clear_widgets(widgets:list):
     for widget in widgets:
         if isinstance(widget, tk.Entry): widget.delete(0, tk.END)
