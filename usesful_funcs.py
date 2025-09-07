@@ -46,3 +46,9 @@ class Tabla: #tabla es inspirada de imagen de Google
         for fila in self.__table:
             if index < len(fila):
                 fila[index].config(width=width_)
+
+    def destroy_table(self):
+        for fila in self.__table:
+            for cell in fila:
+                cell.destroy()
+        self.__table.clear()

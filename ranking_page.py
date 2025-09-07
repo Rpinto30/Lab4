@@ -52,20 +52,20 @@ def page_show_ranking(mainroot, ranking_frame, main_frame):
     l_photo.image = photo
     l_photo.pack()
 
-    BG_FRAME = '#726899'
-    f_buttons = tk.Frame(f_options, bg=BG_FRAME)
+    bg_frame = '#726899'
+    f_buttons = tk.Frame(f_options, bg=bg_frame)
     f_buttons.pack(anchor='center', expand=1, fill='y')
 
-    l_info = tk.Label(f_buttons, text='Selecciona para generar un ranking', bg=BG_FRAME, font=('Arial', 12))
-    FONT_L = ('Arial', 15)
-    WIDTH_B = 18
+    l_info = tk.Label(f_buttons, text='Selecciona para generar un ranking', bg=bg_frame, font=('Arial', 12))
+    font_l = ('Arial', 15)
+    width_b = 18
 
-    b_gen = tk.Button(f_buttons, text='General', width=WIDTH_B, font=FONT_L)
+    b_gen = tk.Button(f_buttons, text='General', width=width_b, font=font_l)
 
-    b_primaria = tk.Button(f_buttons, text='Primaria', width=WIDTH_B, font=FONT_L)
-    b_basico = tk.Button(f_buttons, text='Básico', width=WIDTH_B,font=FONT_L)
-    b_bachillerato = tk.Button(f_buttons, text='Bachillerato', width=WIDTH_B,font=FONT_L)
-    b_salir = tk.Button(f_buttons, text='Salir', width=WIDTH_B,font=FONT_L, command=lambda:return_main(mainroot,main_frame))
+    b_primaria = tk.Button(f_buttons, text='Primaria', width=width_b, font=font_l)
+    b_basico = tk.Button(f_buttons, text='Básico', width=width_b,font=font_l)
+    b_bachillerato = tk.Button(f_buttons, text='Bachillerato', width=width_b,font=font_l)
+    b_salir = tk.Button(f_buttons, text='Salir', width=width_b,font=font_l, command=lambda:return_main(mainroot,main_frame))
 
     l_info.pack(pady=5)
     b_gen.pack(pady=5, padx=50)
@@ -74,4 +74,17 @@ def page_show_ranking(mainroot, ranking_frame, main_frame):
     b_bachillerato.pack(pady=5)
     b_salir.pack(pady=25)
 
+    bandas_primaria = []
+    bandas_basico = []
+    bandas_bach = []
+    for band in bandas:
+        if band.categoria == 'Primaria': bandas_primaria.append(band)
+        elif band.categoria == 'Básico': bandas_basico.append(band)
+        elif band.categoria == 'Bachillerato': bandas_bach.append(band)
 
+    if len(bandas) == 0:
+        l_info.config(text='No hay bandas registradas')
+        b_gen.config(state='disabled')
+    if len(bandas_primaria) == 0: b_primaria.config(state='disabled')
+    if len(bandas_basico) == 0: b_basico.config(state='disabled')
+    if len(bandas_bach) == 0: b_bachillerato.config(state='disabled')
