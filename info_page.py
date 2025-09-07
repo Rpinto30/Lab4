@@ -1,7 +1,6 @@
-import tkinter
-
 from usesful_funcs import *
 from tkinter.ttk import Scrollbar
+from tkinter import PhotoImage
 
 #USO DE BIND PARA DECTECTAR EVENTOS EN TKINTER
 def page_show_info(mainroot, list_frame, main_frame):
@@ -42,6 +41,23 @@ def page_show_info(mainroot, list_frame, main_frame):
 
     f_tabla = Tabla(f_canvas_table, len(tabla_bands), len(tabla_bands[0]), tabla_bands, border_width=2)
     c_tabla.config(scrollregion=c_tabla.bbox("all")) #Configurar el tamaño de la tabla
+
+    #botones
+    photo = PhotoImage(file=r'imagenes/prueba_imagen.png', width=500, height=170)
+    l_photo = tk.Label(f_der, image=photo)
+    l_photo.image = photo
+    l_photo.pack()
+
+    bg_frame = 'blue'
+    f_buttons = tk.Frame(f_der, bg=bg_frame)
+    f_buttons.pack(anchor='center', expand=1, fill='y')
+
+    l_men_info = tk.Label(f_der, text='Filtrar por Categoria', bg=bg_frame,  font=('Arial', 15, 'bold'))
+    front_l = ('Arial', 15, 'bold')
+    width_b = 18
+
+    b_gen = tk.Button(f_buttons, text='General', width=width_b, font=front_l)
+
 
 
 
