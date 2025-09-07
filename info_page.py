@@ -5,3 +5,6 @@ def page_show_info(mainroot, list_frame, main_frame):
     f = tk.Frame(list_frame, width=500, height=100)
     f.pack_propagate(False)
     f.pack()
+
+    f_tb_op = tk.Frame(list_frame, width=550, height=420) #la tabla de valores
+

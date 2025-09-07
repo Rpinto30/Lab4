@@ -15,7 +15,8 @@ class BandaEscolar(BandaParticipante):
     def __init__(self, nombre, institucion, codigo, categoria, puntaje):
         super().__init__(nombre, institucion, codigo)
         self._categoria = categoria
-        self._puntaje = 0
+        self._puntaje = {"ritmo": 0, "uniformidad": 0, "coreografia": 0, "alineacion": 0, "puntualidad": 0}
+        self.__puntaje_total = 0
 
     @property
     def categoria(self):
@@ -25,12 +26,26 @@ class BandaEscolar(BandaParticipante):
         if categori in ["Primaria", "Básico", "Bachillerato"]:
             self._categoria = categori
 
-    def registrar_puntajes(self, puntos):
-        if  0 <= puntos <= 10:
-            self._puntaje = puntos
+    def registrar_puntajes(self, puntos, criterio):
+        try:
+            if  0 <= puntos <= 10:
+                self._puntaje [criterio] = puntos
+                return 0
+        except ValueError:
+            return "Error debe ser un numero"
+
+    def suma_total(self):
+        for suma in self._puntaje.values():
+            self.__puntaje_total += suma
+
+    @property
+    def puntaje_total(self):
+        return self.__puntaje_total
+
 
     def mostrar_info(self):
-        pass
+        valores = [self.nombre, self._institucion, self._codigo, self._categoria, self.__puntaje_total]
+        return valores
 
 class Concurso:
     def __init__(self):
@@ -60,11 +75,6 @@ class Concurso:
         else:
             error = "Error: " + error
             return error
-
-    def registrar_puntaje(self, search_codigo:tk.Entry, entry_puntaje:tk.Entry):
-        search_codigo = tk.Entry(search_codigo)
-        if search_codigo in self.bandas:
-            pass
 
     def listar_bandas(self):
         for banda in self.bandas.values():
