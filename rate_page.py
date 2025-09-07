@@ -24,13 +24,14 @@ def rate_form(mainroot, rate_frame, main_frame):
     c_list_bands = Combobox(f_combo_select, state='readonly',values=[b.nombre for b in bands], width=30, font=('Arial', 15))
     c_list_bands.pack(expand=True, anchor="center")
 
-    b_cancel = tk.Button(f_combo_select, text='Salir', width=10, font=('Arial', 10), command=lambda:return_main(mainroot, main_frame))
-    b_cancel.pack(pady=5)
+    b_cancel_header = tk.Button(f_combo_select, text='Salir', width=10, font=('Arial', 10), command=lambda:return_main(mainroot, main_frame))
+    b_cancel_header.pack(pady=5)
 
-    def pack_rate_forms():
-        c_list_bands.config(state='disable')
+    def pack_rate_forms(is_new):
+        c_list_bands.config(state='disabled')
         l_photo.pack_forget()
         l_select_info.pack_forget()
+        b_cancel_header.pack_forget()
         f_combo_select.config(height=75)
 
         f_rate = tk.Frame(rate_frame, width=750, height=320)
@@ -100,6 +101,10 @@ def rate_form(mainroot, rate_frame, main_frame):
                         l_info_rate.config(text='GUARDANDO...')
 
                         mainroot.concurso.bandas[band.codigo].registrar_puntajes(int(s_ritmo.get()),'ritmo')
+                        mainroot.concurso.bandas[band.codigo].registrar_puntajes(int(s_uniformidad.get()),'uniformidad')
+                        mainroot.concurso.bandas[band.codigo].registrar_puntajes(int(s_coreografia.get()),'coreografia')
+                        mainroot.concurso.bandas[band.codigo].registrar_puntajes(int(s_alineacion.get()),'alineacion')
+                        mainroot.concurso.bandas[band.codigo].registrar_puntajes(int(s_puntualidad.get()),'puntualidad')
                         mainroot.concurso.bandas[band.codigo].suma_total()
                         break
                 mainroot.after(ms=1000, func=exit_frame)
@@ -112,7 +117,9 @@ def rate_form(mainroot, rate_frame, main_frame):
             c_list_bands.config(state='readonly')
             c_list_bands.set('')
             c_list_bands.pack(expand=True, anchor="center")
-            f_combo_select.config(height=120)
+            f_combo_select.config(height=160)
+            b_cancel_header.pack(pady=5)
+
             f_acept.destroy()
             f_rate.destroy()
             l_photo.pack()
@@ -125,18 +132,33 @@ def rate_form(mainroot, rate_frame, main_frame):
         b_mod.pack(anchor='center', side="left", padx=65)
         b_cancel.pack(anchor='center', side="left", padx=65)
 
-        #MODIFICAR
+        # MODIFICAR
+        if is_new:
+            for band in bands:
+                if band.nombre == str(c_list_bands.get()):
+                    print("Homero chino")
+                    scalers[0].set(mainroot.concurso.bandas[band.codigo].puntaje['ritmo'])
+                    scalers[1].set(mainroot.concurso.bandas[band.codigo].puntaje['uniformidad'])
+                    scalers[2].set(mainroot.concurso.bandas[band.codigo].puntaje['coreografia'])
+                    scalers[3].set(mainroot.concurso.bandas[band.codigo].puntaje['alineacion'])
+                    scalers[4].set(mainroot.concurso.bandas[band.codigo].puntaje['puntualidad'])
+                    break
+
 
     def check_modiffy_band():
-        q = True
+        m_question_entry, modify = True, False
         for band in bands:
             if band.nombre == str(c_list_bands.get()):
                 if band.puntaje_total != 0:
-                    q = messagebox.askyesno('Modificar calificación de banda',
+                    m_question_entry = messagebox.askyesno('Modificar calificación de banda',
                                             '¿Deseas modificar la calificacion de esta banda?')
+                    if not m_question_entry: c_list_bands.set('')
+                    else: modify = True
                     break
-        if q: pack_rate_forms()
-        else: c_list_bands.set('')
+                else:
+                    modify = False
+                    break
+        if m_question_entry: pack_rate_forms(modify)
 
     #https://python-course.eu/tkinter/events-and-binds-in-tkinter.php
     c_list_bands.bind("<<ComboboxSelected>>", lambda event: check_modiffy_band())

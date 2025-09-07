@@ -48,6 +48,8 @@ class BandaEscolar(BandaParticipante):
     def puntaje_total(self):
         return self.__puntaje_total
 
+    @property
+    def puntaje(self): return self._puntaje
 
     def mostrar_info(self):
         valores = [self.nombre, self._institucion, self._codigo, self._categoria, self.__puntaje_total]
