@@ -33,7 +33,7 @@ class Tabla: #tabla es inspirada de imagen de Google
         for i in range(total_rows):
             row = []
             for j in range(total_columns):
-                e = tk.Entry(master, width=ancho, fg='blue', font = ("Arial", alto), borderwidth=border_width, relief="solid")
+                e = tk.Entry(master, width=ancho, fg='black', font = ("Arial", alto), borderwidth=border_width, relief="solid")
                 if i == 0: e.config(readonlybackground='#A9B1D1')
                 else: e.config(readonlybackground='#D5D9E8')
                 e.grid(row=i, column=j)

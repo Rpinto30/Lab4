@@ -4,7 +4,6 @@ from usesful_funcs import *
 from tkinter.ttk import Scrollbar
 
 #USO DE BIND PARA DECTECTAR EVENTOS EN TKINTER
-
 def page_show_info(mainroot, list_frame, main_frame):
     mainroot.change_frame(list_frame)
     #https://stackoverflow.com/questions/7727804/tkinter-using-scrollbars-on-a-canvas

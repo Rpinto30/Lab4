@@ -78,7 +78,7 @@ button_rate = tk.Button(buttons_frame, state='disabled',
                         command=lambda:rate_form(root, rate_frame, principal_frame))
 button_list_bands = tk.Button(buttons_frame,state='disabled',
                               command=lambda: page_show_info(root, list_frame, principal_frame))
-button_gen_rank = tk.Button(buttons_frame,state='disabled',
+button_gen_rank = tk.Button(buttons_frame,state='normal',
                             command=lambda: page_show_ranking(root, ranking_frame, principal_frame))
 #AGREGAR BOTONES A FRAME DE BOTONES EN EL MENÚ PRINCIPAL
 BUTTONS_PRINCIPAL_MENU.extend([button_inscr_bad, button_rate, button_list_bands, button_gen_rank])
