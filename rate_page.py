@@ -13,3 +13,4 @@ def rate_form(mainroot, rate_frame, main_frame):
     c_list_bands = Combobox(f_combo_select, state='readonly',values=[b.nombre for b in bands], width=30, font=('Arial', 15))
     c_list_bands.pack(expand=True, anchor="center")
 
+    c_list_bands.bind("<<ComboboxSelected>>", lambda _: print("Hola"))
