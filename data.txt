@@ -1,0 +1,6 @@
+asd:asd:COD.-01:Primaria:0
+&ritmo:0
+&uniformidad:0
+&coreografia:0
+&alineacion:0
+&puntualidad:0

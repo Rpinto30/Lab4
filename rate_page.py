@@ -7,7 +7,8 @@ from save_data import save_data
 
 def rate_form(mainroot, rate_frame, main_frame):
     mainroot.change_frame(rate_frame)
-    f_combo_select = tk.Frame(rate_frame, height=160)
+    BG_COMBO_SELECT = '#7E90CC'
+    f_combo_select = tk.Frame(rate_frame, height=160, bg=BG_COMBO_SELECT)
     f_combo_select.pack_propagate(False)
     f_combo_select.pack(anchor='center', fill='x')
 
@@ -17,16 +18,17 @@ def rate_form(mainroot, rate_frame, main_frame):
     l_photo.pack()
 
     bands = [band for band in mainroot.concurso.bandas.values()]
-    l_header = tk.Label(f_combo_select, text= 'Calificar Banda', font=('Arial',30))
+    l_header = tk.Label(f_combo_select, text= 'Calificar Banda', font=('Arial',30), bg=BG_COMBO_SELECT)
     l_header.pack()
 
-    l_select_info = tk.Label(f_combo_select, text= 'Selecciona una banda previamente registrada', font=('Arial',12))
+    l_select_info = tk.Label(f_combo_select, text= 'Selecciona una banda previamente registrada', font=('Arial',12), bg=BG_COMBO_SELECT)
     l_select_info.pack()
 
     c_list_bands = Combobox(f_combo_select, state='readonly',values=[b.nombre for b in bands], width=30, font=('Arial', 15))
     c_list_bands.pack(expand=True, anchor="center")
 
-    b_cancel_header = tk.Button(f_combo_select, text='Salir', width=10, font=('Arial', 10), command=lambda:return_main(mainroot, main_frame))
+    b_cancel_header = tk.Button(f_combo_select, text='Salir', width=10, font=('Arial', 10), command=lambda:return_main(mainroot, main_frame),
+                                bg=B_COLOR_CANCEL, activebackground=B_COLOR_CANCEL_SEL, fg=B_BUTTON_TEXT)
     b_cancel_header.pack(pady=5)
 
     def pack_rate_forms(is_new):
@@ -40,7 +42,7 @@ def rate_form(mainroot, rate_frame, main_frame):
         f_rate.pack_propagate(False)
         f_rate.pack(anchor='n', expand=1)
 
-        f_acept = tk.Frame(rate_frame, width=750, height=105, bg='red')
+        f_acept = tk.Frame(rate_frame, width=750, height=105, bg='#CAD6E0')
         f_acept.pack_propagate(False)
         f_acept.pack(anchor='s', expand=1)
 

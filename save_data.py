@@ -18,13 +18,11 @@ def load_data(diction:dict):
                         #PARA LOS PUNTAJES POR CATEGORIA
                         name_categoria, puntaje_categoria = line.split(':')
                         name_categoria = str(name_categoria).replace('&', '')
-                        print(name_categoria, puntaje_categoria)
                         diction[next(reversed(diction))].puntaje[name_categoria] = int(puntaje_categoria)
                     else:
                         nombre, institucion, codigo, categoria, p_total = line.split(':')
                         b = BandaEscolar(nombre,institucion,codigo,categoria)
                     b.suma_total()
-                    print(b.nombre, b.puntaje)
                     diction[codigo] = b
     except FileNotFoundError:
         # print("nO DATOS")

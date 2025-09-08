@@ -29,6 +29,9 @@ class Window(tk.Tk):
         self.concurso = Concurso()
         load_data(self.concurso.bandas)
 
+        #ICONO
+        icon_image = tk.PhotoImage(file='imagenes/ticky.gif')
+        self.iconphoto(True, icon_image)
         self.CURRENT_FRAME = None
         self.protocol("WM_DELETE_WINDOW", salir)
         #Concurso()
@@ -52,10 +55,10 @@ root.change_frame(principal_frame)
 principal_frame.config(bg=BACKGROUND_PRINCIPAL, width=1000, height=500)
 
 inscribe_frame = tk.Frame(root)
-inscribe_frame.config(bg='#ad3e3e',width=1000, height=500)
+inscribe_frame.config(bg='#D6B574',width=1000, height=500)
 
 rate_frame = tk.Frame(root)
-rate_frame.config(bg='#449147', width=1000, height=500)
+rate_frame.config(bg='#9FC963', width=1000, height=500)
 
 list_frame = tk.Frame(root)
 list_frame.config(bg='#6C74B8',width=1000, height=500)
